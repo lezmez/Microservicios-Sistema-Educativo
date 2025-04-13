@@ -11,7 +11,7 @@
 	<groupId>com.microservice</groupId>
 	<artifactId>subjects</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>subjects</name>
+	<name>subject</name>
 	<description>Materias</description>
 	<url/>
 	<licenses>

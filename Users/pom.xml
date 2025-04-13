@@ -10,9 +10,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.microservice</groupId>
-	<artifactId>users-service</artifactId>
+	<artifactId>users</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>users-service</name>
+	<name>user</name>
 	<description>Microservicio de gestión de usuarios</description>
 	<properties>
 		<java.version>17</java.version>

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.microservice</groupId>
-	<artifactId>registration-service</artifactId>
+	<artifactId>registration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>registration-service</name>
+	<name>registration</name>
 	<description>Microservicio de Registro</description>
 	<url/>
 	<licenses>

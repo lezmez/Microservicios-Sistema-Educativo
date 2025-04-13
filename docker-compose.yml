@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    build:
+      context: ./eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices
+
+  monitor-admin:
+    build:
+      context: ./monitor-admin
+    ports:
+      - "8088:8088"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices
+
+  config-server:
+    build:
+      context: ./config-server
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/JefferPinzon/prueba1
+    networks:
+      - microservices
+
+  subjects:
+    build:
+      context: ./subjects
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
+      - mongo
+    networks:
+      - microservices
+
+  users:
+    build:
+      context: ./users
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+      - mongo
+    networks:
+      - microservices
+
+  registration:
+    build:
+      context: ./registration
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka-server
+      - mongo
+    networks:
+      - microservices
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - microservices
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - microservices
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - microservices
+
+networks:
+  microservices:
+    driver: bridge
