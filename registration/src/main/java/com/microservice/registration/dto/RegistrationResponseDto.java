@@ -11,12 +11,12 @@ public class RegistrationResponseDto {
     @Data
     public static class UserDto {
         private String id; // ID del usuario como String
-        private String name; // Nombre del usuario
+        private String nombre; // Nombre del usuario
     }
 
     @Data
     public static class SubjectDto {
         private String id; // ID de la asignatura como String
-        private String name; // Nombre de la asignatura
+        private String subjectName; // Nombre de la asignatura
     }
 }

@@ -1,9 +1,12 @@
 package com.microservice.registration.service;
 
-import com.microservice.registration.dto.RegistrationDto; // Cambiado de RegistrationDTO a RegistrationDto
-import com.microservice.registration.dto.RegistrationResponseDto; // Cambiado de RegistrationResponseDTO a RegistrationResponseDto
-import com.microservice.registration.entity.Registration;
-import com.microservice.registration.repository.RegistrationRepository;
+// Cliente para obtener información de la asignatura
+import com.microservice.registration.client.SubjectClient;
+import com.microservice.registration.client.UserClient;
+// Cliente para obtener información del usuario
+import com.microservice.registration.dto.RegistrationResponseDto; // DTO de respuesta
+import com.microservice.registration.entity.Registration; // Entidad de registro
+import com.microservice.registration.repository.RegistrationRepository; // Repositorio de registros
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +18,21 @@ import java.util.stream.Collectors;
 public class RegistrationService {
 
     private final RegistrationRepository registrationRepository;
+    private final UserClient usuarioClient; // Cliente para obtener información del usuario
+    private final SubjectClient asignaturaClient; // Cliente para obtener información de la asignatura
 
     public String registerStudent(String userId, String subjectId) { // Ambos son String
+        // Obtener información del usuario y de la asignatura
+        RegistrationResponseDto.UserDto usuario = usuarioClient.getUserById(userId);
+        RegistrationResponseDto.SubjectDto asignatura = asignaturaClient.getSubjectById(subjectId);
+
+        // Crear un nuevo registro
         Registration registration = new Registration();
         registration.setUserId(userId); // Cambiado a setUser Id
         registration.setSubjectId(subjectId); // Cambiado a setSubjectId
         registrationRepository.save(registration);
-        return "Student registered successfully!";
+
+        return "Student " + usuario.getNombre() + " registered in " + asignatura.getSubjectName(); // Mensaje de éxito
     }
 
     public List<RegistrationResponseDto> listAll() {
@@ -47,10 +58,18 @@ public class RegistrationService {
         responseDto.setId(registration.getId());
         responseDto.setUser (new RegistrationResponseDto.UserDto());
         responseDto.getUser ().setId(registration.getUserId()); // Cambiado a getUser Id
-        responseDto.getUser ().setName("User  Name Placeholder"); // Aquí deberías obtener el nombre real del usuario
+
+        // Obtener el nombre real del usuario
+        RegistrationResponseDto.UserDto usuario = usuarioClient.getUserById(registration.getUserId());
+        responseDto.getUser ().setNombre(usuario.getNombre()); // Obtener el nombre real del usuario
+
         responseDto.setSubject(new RegistrationResponseDto.SubjectDto());
         responseDto.getSubject().setId(registration.getSubjectId()); // Cambiado a getSubjectId
-        responseDto.getSubject().setName("Subject Name Placeholder"); // Aquí deberías obtener el nombre real de la asignatura
+
+        // Obtener el nombre real de la asignatura
+        RegistrationResponseDto.SubjectDto asignatura = asignaturaClient.getSubjectById(registration.getSubjectId());
+        responseDto.getSubject().setSubjectName(asignatura.getSubjectName()); // Obtener el nombre real de la asignatura
+
         return responseDto;
     }
 }
