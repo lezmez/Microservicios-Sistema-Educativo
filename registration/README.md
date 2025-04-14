@@ -1,4 +1,4 @@
-# Microservicio de Registro (Registration Microservice)
+# Microservicio de Matricula (Registration Microservice)
 ## Descripción
 El microservicio de Registro (Registration) es parte de una arquitectura de microservicios diseñada para gestionar las matriculaciones de estudiantes en asignaturas. Este servicio se encarga de vincular usuarios con asignaturas, manteniendo un registro de estas relaciones y comunicándose con otros microservicios para obtener información detallada.
 ## Tecnologías
