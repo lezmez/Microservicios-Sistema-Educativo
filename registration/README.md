@@ -363,17 +363,6 @@ curl -X GET http://localhost:8083/api/registrations/student/1
 curl -X GET http://localhost:8083/api/registrations/subject/101
 ```
 
-## Licencia
-Este proyecto está licenciado bajo la Licencia Apache 2.0 - consulte el archivo LICENSE para más detalles.
-
-## Contacto y Contribución
-Para contribuir al proyecto:
-1. Hacer fork del repositorio
-2. Crear una rama para su característica (`git checkout -b feature/amazing-feature`)
-3. Confirmar cambios (`git commit -m 'Add some amazing feature'`)
-4. Enviar a la rama (`git push origin feature/amazing-feature`)
-5. Abrir un Pull Request
-
 ## Autor (es) ✒️
 
 Este sitio fue realizado por:
