@@ -24,6 +24,13 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - eureka-server
+    entrypoint: >
+      /bin/sh -c "
+        echo 'Esperando 20 segundos para que Eureka Server se inicialice...' &&
+        sleep 20 &&
+        echo 'Iniciando Config Server...' &&
+        exec java -jar app.jar
+      "
     networks:
       - microservices
 
@@ -70,8 +77,15 @@ services:
     depends_on:
       - eureka-server
       - config-server
+    entrypoint: >
+      /bin/sh -c "
+        echo 'Esperando 30 segundos para iniciar Users Service...' &&
+        sleep 30 &&
+        exec java -jar app.jar
+      "
     networks:
       - microservices
+
   subjects:
     build:
       context: ./subjects
@@ -88,8 +102,15 @@ services:
     depends_on:
       - eureka-server
       - config-server
+    entrypoint: >
+      /bin/sh -c "
+        echo 'Esperando 35 segundos para iniciar Subjects Service...' &&
+        sleep 35 &&
+        exec java -jar app.jar
+      "
     networks:
       - microservices
+
   registration:
     build:
       context: ./registration
@@ -106,8 +127,15 @@ services:
     depends_on:
       - eureka-server
       - config-server
+    entrypoint: >
+      /bin/sh -c "
+        echo 'Esperando 40 segundos para iniciar Registration Service...' &&
+        sleep 40 &&
+        exec java -jar app.jar
+      "
     networks:
       - microservices
+
 
   prometheus:
     image: prom/prometheus
@@ -116,8 +144,6 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    depends_on:
-      - eureka-server
     networks:
       - microservices
 
@@ -128,8 +154,6 @@ services:
       - "3000:3000"
     volumes:
       - grafana-data:/var/lib/grafana
-    depends_on:
-      - prometheus
     networks:
       - microservices
 
