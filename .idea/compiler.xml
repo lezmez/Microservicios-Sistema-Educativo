@@ -12,6 +12,7 @@
         <module name="monitor-admin" />
         <module name="users-service" />
         <module name="eureka-server" />
+        <module name="users" />
       </profile>
       <profile name="Annotation profile for subject" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -31,6 +32,7 @@
       <module name="monitor-admin" options="-parameters" />
       <module name="registration-service" options="-parameters" />
       <module name="subjects" options="-parameters" />
+      <module name="users" options="-parameters" />
       <module name="users-service" options="-parameters" />
     </option>
   </component>

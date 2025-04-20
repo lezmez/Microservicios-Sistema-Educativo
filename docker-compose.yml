@@ -35,7 +35,7 @@ services:
     volumes:
       - mongo-data:/data/db
     environment:
-      MONGO_INITDB_DATABASE:
+      MONGO_INITDB_DATABASE: app
     networks:
       - microservices
 
@@ -56,7 +56,7 @@ services:
       - microservices
   users:
     build:
-      context: ./Users
+      context: ./users
     hostname: users-service
     ports:
       - "8081:8081"
