@@ -66,6 +66,7 @@ services:
       - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/userdb
     depends_on:
       - eureka-server
       - config-server
@@ -83,6 +84,7 @@ services:
       - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/subjectdb
     depends_on:
       - eureka-server
       - config-server
@@ -100,6 +102,7 @@ services:
       - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/registrationdb
     depends_on:
       - eureka-server
       - config-server
